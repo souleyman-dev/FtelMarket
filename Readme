@@ -1,0 +1,70 @@
+# FTELMarket API
+
+API REST en ASP.NET Core (.NET 9) pour la place de marché FTELMarket : gestion d'un catalogue de produits classés par catégorie. 
+
+
+
+## Démarrage rapide
+
+### 1. Démarrer la base de données
+
+Depuis la racine du projet :
+
+```bash
+docker compose up -d
+docker compose ps
+```
+
+Le conteneur `ftelmarket-db` doit être à l'état `running`.
+
+### 2. Appliquer les migrations
+
+Depuis `FtelMarket/` :
+
+```bash
+dotnet ef database update
+```
+
+### 3. Lancer l'API
+
+```bash
+dotnet watch run --launch-profile http
+```
+
+L'API écoute sur `http://localhost:5082`.
+
+### 4. Lancer le front
+
+Dans le projet front
+```bash
+docker compose up -d 
+```
+
+## Configuration
+
+### Base de données
+
+Docker Compose crée la base avec :
+
+| Paramètre | Valeur |
+|---|---|
+| Hôte | `localhost` |
+| Port | `5432` |
+| Base | `ftelmarket` |
+| Utilisateur | `ftel` |
+| Mot de passe | `ftel_dev_pwd` |
+
+
+### CORS
+
+`Program.cs` autorise l'origine du front Vite (`http://localhost:3000`). 
+
+## Base de données et migrations
+
+
+```bash
+cd FtelMarket.Api
+dotnet ef migrations add InitialCreate --output-dir Data/Migrations
+dotnet ef database update
+```
+

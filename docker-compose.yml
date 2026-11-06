@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16.4
+    container_name: ftelmarket-db
+    environment:
+      POSTGRES_USER: ftel
+      POSTGRES_PASSWORD: ftel_dev_pwd
+      POSTGRES_DB: ftelmarket
+    ports:
+      - "5432:5432"
+    volumes:
+      - ftelmarket-data:/var/lib/postgresql/data
+
+volumes:
+  ftelmarket-data:
